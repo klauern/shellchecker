@@ -12,6 +12,12 @@ RUN buffalo build --static -o /bin/app
 FROM alpine
 RUN apk add --no-cache bash
 RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache curl
+RUN curl -O https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
+RUN tar xvf shellcheck-latest.linux.x86_64.tar.xz
+RUN mv shellcheck-latest/shellcheck /bin/
+RUN rm -r shellcheck*
+
 
 # Comment out to run the binary in "production" mode:
 # ENV GO_ENV=production
