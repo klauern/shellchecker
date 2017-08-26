@@ -15,7 +15,7 @@ import (
 const ErrorCodeRegexp = `(?m)^[Ss][Cc][0-9]{4}$`
 
 // ShellCheckLoc represents the submodule that we load all of the various SCXXXX codes from.
-const ShellCheckLoc = "shellcheck.wiki"
+const ShellCheckLoc = "assets/shellcheck.wiki"
 
 // LookupShellCheckError will search for the particular error code returned
 // by shellcheck and give the Wiki page from the shellcheck.wiki site.
