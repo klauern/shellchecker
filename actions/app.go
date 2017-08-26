@@ -36,6 +36,8 @@ func App() *buffalo.App {
 
 		app.GET("/code/{code}", LookupShellCheckErrorHandler)
 
+		app.POST("/check", CheckShellCodeHandler)
+
 	}
 
 	return app
