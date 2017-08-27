@@ -87,8 +87,7 @@ func CheckShellCodeHandler(c buffalo.Context) error {
 		errs[i] = v
 	}
 
-	c.Render(200, r.JSON(errs))
-	return nil
+	return c.Render(200, r.JSON(errs))
 }
 
 func removeThing(name string) {
