@@ -41,30 +41,29 @@ func writeTempFile(file []byte) (*os.File, error) {
 }
 
 func runShellCheck(input []byte) ([]ShellCheckErrors, error) {
-	log := buffalo.NewLogger("DEBUG")
 	path, err := exec.LookPath("shellcheck")
 	if err != nil {
 		return nil, errors.WithMessage(err, "cannot find shellcheck")
 	}
-	log.Debugf("Found shellcheck executable")
+	debugLog.Debugf("found shellcheck executable")
 
 	file, err := writeTempFile(input)
 	if err != nil {
 		return nil, errors.WithMessage(err, "cannot write tempfile to run shellcheck")
 	}
-	log.Debugf("wrote to temp file %v", file.Name())
+	debugLog.Debugf("wrote to temp file %v", file.Name())
 	defer removeThing(file.Name())
 
 	scCmd := exec.Command(path, "-f", "json", file.Name())
 	output, err := scCmd.Output()
-	log.Debugf("output is %s", output)
-	log.Debugf("err is %v", err)
+	debugLog.Debugf("output is %s", output)
+	debugLog.Debugf("err is %v", err)
 	if err != nil {
 		if !strings.HasPrefix(err.Error(), "exit status 1") {
 			return nil, errors.WithMessage(err, "error executing shellcheck command")
 		}
-
 	}
+
 	var errs []ShellCheckErrors
 	if err = json.Unmarshal(output, &errs); err != nil {
 		return nil, errors.WithMessage(err, "unable to unmarshal output for shellcheck")

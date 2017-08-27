@@ -1,8 +1,6 @@
 package actions
 
 import (
-	"os"
-	"path"
 	"regexp"
 	"strings"
 
@@ -15,22 +13,7 @@ import (
 const ErrorCodeRegexp = `(?m)^[Ss][Cc][0-9]{4}$`
 
 // ShellCheckLoc represents the submodule that we load all of the various SCXXXX codes from.
-const ShellCheckLoc = "assets/shellcheck.wiki"
-
-// LookupShellCheckError will search for the particular error code returned
-// by shellcheck and give the Wiki page from the shellcheck.wiki site.
-func LookupShellCheckError(code string) (string, error) {
-	log := buffalo.NewLogger("DEBUG")
-	log.Debug("lookup shellcheck code for " + code)
-	normCode := normalizeCode(code)
-	shellCheckCodeFile := path.Join(ShellCheckLoc, normCode+".md")
-	_, err := os.Stat(shellCheckCodeFile)
-	if os.IsNotExist(err) {
-		log.Debugf("%v does not exist", shellCheckCodeFile)
-		return "", errors.WithMessage(err, "file "+shellCheckCodeFile+" does not exist")
-	}
-	return shellCheckCodeFile, nil
-}
+const ShellCheckLoc = "shellcheck.wiki"
 
 func normalizeCode(code string) string {
 	log := buffalo.NewLogger("DEBUG")
@@ -47,9 +30,15 @@ func normalizeCode(code string) string {
 
 // LookupShellCheckErrorHandler is a handler for /code/{code} lookups.
 func LookupShellCheckErrorHandler(c buffalo.Context) error {
-	file, err := LookupShellCheckError(c.Param("code"))
-	if err != nil {
-		return errors.WithStack(err)
+	code := normalizeCode(c.Param("code"))
+	debugLog.Debugf("lookup code for " + code)
+	p := ShellCheckLoc + "/" + code + ".md"
+	if r.TemplatesBox.Has(p) {
+		debugLog.Debugf("TemplatesBox has code %v", p)
+		return c.Render(200, r.HTML(p))
+	} else {
+		debugLog.Debugf("TemplatesBox can't find %v", p)
 	}
-	return c.Render(200, r.HTML(file))
+	return c.Error(404, errors.Errorf("could not find %s", c.Param("code")))
+
 }

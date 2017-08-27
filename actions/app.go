@@ -12,6 +12,8 @@ import (
 var ENV = envy.Get("GO_ENV", "development")
 var app *buffalo.App
 
+var debugLog = buffalo.NewLogger("DEBUG")
+
 // App is where all routes and middleware for buffalo
 // should be defined. This is the nerve center of your
 // application.
@@ -33,11 +35,11 @@ func App() *buffalo.App {
 		}
 
 		app.GET("/", HomeHandler)
+		app.POST("/check", CheckShellCodeHandler)
 
 		app.GET("/code/{code}", LookupShellCheckErrorHandler)
 
-		app.POST("/check", CheckShellCodeHandler)
-
+		app.Middleware.Skip(middleware.SetContentType("application/json"), LookupShellCheckErrorHandler)
 	}
 
 	return app
