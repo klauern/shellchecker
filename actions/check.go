@@ -53,7 +53,7 @@ func runShellCheck(input []byte) ([]ShellCheckErrors, error) {
 		return nil, errors.WithMessage(err, "cannot write tempfile to run shellcheck")
 	}
 	log.Debugf("wrote to temp file %v", file.Name())
-	defer os.Remove(file.Name())
+	defer removeThing(file.Name())
 
 	scCmd := exec.Command(path, "-f", "json", file.Name())
 	output, err := scCmd.Output()
@@ -76,7 +76,7 @@ func runShellCheck(input []byte) ([]ShellCheckErrors, error) {
 func CheckShellCodeHandler(c buffalo.Context) error {
 	script, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
-		errors.WithMessage(err, "not able to read POST body")
+		return errors.WithMessage(err, "not able to read POST body")
 	}
 	errs, err := runShellCheck(script)
 	if err != nil {
@@ -89,4 +89,12 @@ func CheckShellCodeHandler(c buffalo.Context) error {
 
 	c.Render(200, r.JSON(errs))
 	return nil
+}
+
+func removeThing(name string) {
+	err := os.Remove(name)
+	if err != nil {
+		errLog := buffalo.NewLogger("ERROR")
+		errLog.Errorf("error removing %v: %v", name, err)
+	}
 }
