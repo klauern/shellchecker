@@ -5,10 +5,10 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/pkg/errors"
-	"strings"
 )
 
 // ShellCheckErrors represents the output from running shellcheck and outputting
