@@ -8,9 +8,11 @@ install: false
 
 go:
   - 1.8
+  - 1.9
 
 script:
-  - docker build .
+  - dep ensure
+  - buffalo test
 
 addons:
   code_climate:
