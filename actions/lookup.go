@@ -21,7 +21,7 @@ const ShellCheckLoc = "assets/shellcheck.wiki"
 // by shellcheck and give the Wiki page from the shellcheck.wiki site.
 func LookupShellCheckError(code string) (string, error) {
 	log := buffalo.NewLogger("DEBUG")
-	log.Debug("lookup shellcheck code for "+code)
+	log.Debug("lookup shellcheck code for " + code)
 	normCode := normalizeCode(code)
 	shellCheckCodeFile := path.Join(ShellCheckLoc, normCode+".md")
 	_, err := os.Stat(shellCheckCodeFile)
@@ -34,7 +34,7 @@ func LookupShellCheckError(code string) (string, error) {
 
 func normalizeCode(code string) string {
 	log := buffalo.NewLogger("DEBUG")
-	log.Debug("parsing regex code for "+code)
+	log.Debug("parsing regex code for " + code)
 	var re = regexp.MustCompile(ErrorCodeRegexp)
 	if len(re.FindString(code)) > 0 {
 		log.Debug("found shellcheck code in regex")
