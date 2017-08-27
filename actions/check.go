@@ -11,6 +11,8 @@ import (
 	"strings"
 )
 
+// ShellCheckErrors represents the output from running shellcheck and outputting
+// the errors in JSON format.  This is tied to the 'shellcheck' command's output.
 type ShellCheckErrors struct {
 	File      string `json:"file"`
 	Line      int    `json:"line"`
@@ -70,6 +72,7 @@ func runShellCheck(input []byte) ([]ShellCheckErrors, error) {
 	return errs, nil
 }
 
+// CheckShellCodeHandler handles calls for /check paths.
 func CheckShellCodeHandler(c buffalo.Context) error {
 	script, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
