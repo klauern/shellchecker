@@ -9,9 +9,9 @@ ADD . .
 RUN dep ensure
 RUN buffalo build --static -o /bin/app
 
-FROM alpine
-RUN apk add --no-cache bash
-RUN apk add --no-cache ca-certificates
+
+
+FROM alpine as shellcheck
 RUN apk add --no-cache curl
 RUN curl -O https://storage.googleapis.com/shellcheck/shellcheck-latest.linux.x86_64.tar.xz
 RUN tar xvf shellcheck-latest.linux.x86_64.tar.xz
@@ -19,12 +19,17 @@ RUN mv shellcheck-latest/shellcheck /bin/
 RUN rm -r shellcheck*
 
 
+FROM alpine
+RUN apk add --no-cache bash
+RUN apk add --no-cache ca-certificates
+
 # Comment out to run the binary in "production" mode:
 # ENV GO_ENV=production
 
 WORKDIR /bin/
 
 COPY --from=builder /bin/app .
+COPY --from=shellcheck /bin/shellcheck .
 
 EXPOSE 3000
 
