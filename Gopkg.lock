@@ -23,7 +23,7 @@
   branch = "master"
   name = "github.com/dustin/go-humanize"
   packages = ["."]
-  revision = "259d2a102b871d17f30e3cd9881a642961a1e486"
+  revision = "79e699ccd02f240a1f1fbbdcee7e64c1c12e41aa"
 
 [[projects]]
   name = "github.com/fatih/color"
@@ -70,8 +70,8 @@
 [[projects]]
   name = "github.com/gobuffalo/plush"
   packages = [".","ast","lexer","parser","token"]
-  revision = "08dc75a402ee1a2055a1970a7f63f41ee90f7d83"
-  version = "v2.0.1"
+  revision = "25f3d421c89d570f7f92b9fec3cd371f2927e2bb"
+  version = "v2.1.0"
 
 [[projects]]
   branch = "master"
@@ -209,7 +209,7 @@
   branch = "master"
   name = "github.com/microcosm-cc/bluemonday"
   packages = ["."]
-  revision = "f0d1606e9e60cb2428f85ddcbfcccfeb6b507586"
+  revision = "1c44c0b45a213b21569d6dbf440c47191652566f"
 
 [[projects]]
   branch = "master"
@@ -236,10 +236,10 @@
   version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/russross/blackfriday"
   packages = ["."]
   revision = "4048872b16cc0fc2c5fd9eacf0ed2c2fedaa0c8c"
+  version = "v1.5"
 
 [[projects]]
   name = "github.com/satori/go.uuid"
@@ -352,6 +352,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8f4311ce9e5a5363b4a363e63d9075ad9ebfc790094b985a40c2df21e8a9820c"
+  inputs-digest = "563b9af82c4d53ec6cfa5d1eb51de043fc0488f590ae9bffe8516981c7df9f66"
   solver-name = "gps-cdcl"
   solver-version = 1
