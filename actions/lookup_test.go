@@ -1,7 +1,7 @@
 package actions_test
 
 func (as *ActionSuite) Test_LookupCode_GET() {
-	var badCodeLookupTests = []struct {
+	var tt = []struct {
 		scCode string
 		code   int
 	}{
@@ -12,8 +12,8 @@ func (as *ActionSuite) Test_LookupCode_GET() {
 		{"SC444", 404},
 		{"SC2222", 404},
 	}
-	for _, tt := range badCodeLookupTests {
-		res := as.HTML("/code/" + tt.scCode).Get()
-		as.Equal(tt.code, res.Code)
+	for _, tc := range tt {
+		res := as.HTML("/code/" + tc.scCode).Get()
+		as.Equal(tc.code, res.Code)
 	}
 }

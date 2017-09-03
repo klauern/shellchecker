@@ -2,7 +2,7 @@ package actions_test
 
 func (as *ActionSuite) Test_CheckShellScripts() {
 
-	var checkScriptTests = []struct {
+	var tt = []struct {
 		inFile           string
 		expectStatusCode int
 		expectErrorCount int
@@ -14,9 +14,9 @@ func (as *ActionSuite) Test_CheckShellScripts() {
 			expectErrorCount: 3,
 		},
 	}
-	for _, tt := range checkScriptTests {
-		resp := as.JSON("/check").Post([]byte(tt.inFile))
-		as.Equal(tt.expectStatusCode, resp.Code)
+	for _, tc := range tt {
+		resp := as.JSON("/check").Post([]byte(tc.inFile))
+		as.Equal(tc.expectStatusCode, resp.Code)
 	}
 
 }
