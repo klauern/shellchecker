@@ -23,7 +23,7 @@
 
 [[constraint]]
   name = "github.com/gobuffalo/buffalo"
-  version = "0.9.3"
+  version = "0.9.4"
 
 [[constraint]]
   name = "github.com/gobuffalo/envy"
@@ -32,3 +32,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/gobuffalo/suite"
+
+[[constraint]]
+  name = "github.com/pkg/errors"
+  version = "0.8.0"

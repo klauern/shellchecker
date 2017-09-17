@@ -52,8 +52,8 @@
 [[projects]]
   name = "github.com/gobuffalo/buffalo"
   packages = [".","binding","middleware","middleware/csrf","render","worker"]
-  revision = "b68b2b743259e4d1480b5683680d2223cf4ae6f0"
-  version = "v0.9.3"
+  revision = "03ac98e6bef0da61096d66edb574b8aceba72e54"
+  version = "v0.9.4"
 
 [[projects]]
   name = "github.com/gobuffalo/envy"
@@ -168,6 +168,12 @@
   packages = ["refresh","refresh/web"]
   revision = "31a58af168f3788ce36d49f66aca4b439f64c7d4"
   version = "v1.3.3"
+
+[[projects]]
+  name = "github.com/markbates/sigtx"
+  packages = ["."]
+  revision = "daa2e5f08161c569ca3d938d70750ccd038daf16"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -352,6 +358,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "563b9af82c4d53ec6cfa5d1eb51de043fc0488f590ae9bffe8516981c7df9f66"
+  inputs-digest = "af6f19bed7b9f95d248b98884b36fbf1ccf722ec849920528d400109ab84d0b6"
   solver-name = "gps-cdcl"
   solver-version = 1
